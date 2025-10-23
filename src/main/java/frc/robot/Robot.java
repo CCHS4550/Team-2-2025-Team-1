@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 
+enum SPEEDMODE {
+  HIGH,
+  LOW
+}
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
  * the TimedRobot documentation. If you change the name of this class or the package after creating
@@ -21,8 +25,11 @@ public class Robot extends TimedRobot {
    */
   public Robot() {}
 
-  private double speedSens = 0.6;
-  private double turnSens = 0.3;
+  private double speedSensH = 0.6;
+  private double turnSensH = 0.3;
+  private double speedSensL = 0.3;
+  private double turnSensL = 0.15;
+  private SPEEDMODE driveSpeed = SPEEDMODE.HIGH;
 
   private Spark leftMotor1 = new Spark(0);
   private Spark leftMotor2 = new Spark(1);
@@ -32,6 +39,7 @@ public class Robot extends TimedRobot {
   private Joystick stick1 = new Joystick(0);
 
   private double autoStartTime;
+
 
   @Override
   public void robotPeriodic() {}
@@ -63,8 +71,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    double speed = stick1.getRawAxis(1)*speedSens;
-    double turn = stick1.getRawAxis(4)*turnSens;
+    double speed = driveSpeed == SPEEDMODE.HIGH ? stick1.getRawAxis(1)*speedSensH : stick1.getRawAxis(1)*speedSensL;
+    double turn = driveSpeed == SPEEDMODE.HIGH ? stick1.getRawAxis(4)*turnSensH : stick1.getRawAxis(4)*turnSensL;
 
     double left = speed + turn;
     double right = speed - turn;
