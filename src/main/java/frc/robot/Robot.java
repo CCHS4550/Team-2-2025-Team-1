@@ -5,6 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -18,20 +21,59 @@ public class Robot extends TimedRobot {
    */
   public Robot() {}
 
+  private double speedSens = 0.6;
+  private double turnSens = 0.3;
+
+  private Spark leftMotor1 = new Spark(0);
+  private Spark leftMotor2 = new Spark(1);
+  private Spark rightMotor1 = new Spark(2);
+  private Spark rightMotor2 = new Spark(3);
+
+  private Joystick stick1 = new Joystick(0);
+
+  private double autoStartTime;
+
   @Override
   public void robotPeriodic() {}
 
   @Override
-  public void autonomousInit() {}
+  public void autonomousInit() {
+    autoStartTime = Timer.getFPGATimestamp();
+  }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    double time = Timer.getFPGATimestamp();
+
+    if(time - autoStartTime < 2){
+      leftMotor1.set(0.6);
+      leftMotor2.set(0.6);
+      rightMotor1.set(-0.6);
+      rightMotor2.set(-0.6);
+    } else {
+      leftMotor1.set(0);
+      leftMotor2.set(0);
+      rightMotor1.set(0);
+      rightMotor2.set(0);
+    }
+  }
 
   @Override
   public void teleopInit() {}
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    double speed = stick1.getRawAxis(1)*speedSens;
+    double turn = stick1.getRawAxis(4)*turnSens;
+
+    double left = speed + turn;
+    double right = speed - turn;
+
+    leftMotor1.set(left);
+    leftMotor2.set(left);
+    rightMotor1.set(right);
+    rightMotor2.set(right);
+  }
 
   @Override
   public void disabledInit() {}
