@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
   private double turnSensL = 0.15;
   private SPEEDMODE driveSpeed = SPEEDMODE.HIGH;
 
+  //motors for the drivetrain
   private Spark leftMotor1 = new Spark(0);
   private Spark leftMotor2 = new Spark(1);
   private Spark rightMotor1 = new Spark(2);
@@ -52,7 +53,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     double time = Timer.getFPGATimestamp();
-
+    
+    //moves forward for 2 seconds
     if(time - autoStartTime < 2){
       leftMotor1.set(0.6);
       leftMotor2.set(0.6);
@@ -74,13 +76,14 @@ public class Robot extends TimedRobot {
     double speed = driveSpeed == SPEEDMODE.HIGH ? stick1.getRawAxis(1)*speedSensH : stick1.getRawAxis(1)*speedSensL;
     double turn = driveSpeed == SPEEDMODE.HIGH ? stick1.getRawAxis(4)*turnSensH : stick1.getRawAxis(4)*turnSensL;
 
+    //arcade drive
     double left = speed + turn;
     double right = speed - turn;
 
     leftMotor1.set(left);
     leftMotor2.set(left);
-    rightMotor1.set(right);
-    rightMotor2.set(right);
+    rightMotor1.set(-right);
+    rightMotor2.set(-right);
   }
 
   @Override
