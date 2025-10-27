@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -25,6 +26,13 @@ public class Robot extends TimedRobot {
    * initialization code.
    */
   public Robot() {}
+
+  //Flywheel motors
+  private final Spark flywheel1 = new Spark(4);
+  private final Spark flywheel2 = new Spark(4);
+
+  private final double flywheelSpeed = 0.6;
+
   //speed sensitivity H = High, L = low
   private final double speedSensH = 0.6;
   private final double turnSensH = 0.3;
@@ -33,16 +41,18 @@ public class Robot extends TimedRobot {
   private SPEEDMODE driveSpeed = SPEEDMODE.HIGH;
 
   //motors for the drivetrain CHANGE CHANNEL TO PROPER CHANNEL
-  private Spark leftMotor1 = new Spark(0);
-  private Spark leftMotor2 = new Spark(1);
-  private Spark rightMotor1 = new Spark(2);
-  private Spark rightMotor2 = new Spark(3);
+  private final Spark leftMotor1 = new Spark(0);
+  private final Spark leftMotor2 = new Spark(1);
+  private final Spark rightMotor1 = new Spark(2);
+  private final Spark rightMotor2 = new Spark(3);
 
-  private DifferentialDrive drive1 = new DifferentialDrive(leftMotor1,rightMotor1);
-  private DifferentialDrive drive2 = new DifferentialDrive(leftMotor2,rightMotor2);
+  private final DifferentialDrive drive1 = new DifferentialDrive(leftMotor1,rightMotor1);
+  private final DifferentialDrive drive2 = new DifferentialDrive(leftMotor2,rightMotor2);
 
-  //Joystick CHANGE PORT TO PROPER PORT
-  private Joystick driveStick = new Joystick(0);
+  //Joystick/button board CHANGE PORT TO PROPER PORT
+  private final Joystick driveStick = new Joystick(0);
+  private final Joystick buttonBoard = new Joystick(1);
+
 
   private double autoStartTime;
 
@@ -81,6 +91,15 @@ public class Robot extends TimedRobot {
     //arcade drive
     drive1.arcadeDrive(speed, turn);
     drive2.arcadeDrive(speed, turn);
+
+    //flywheel
+    if(buttonBoard.getRawButton(0) == true){
+      flywheel1.set(flywheelSpeed);
+      flywheel2.set(flywheelSpeed);
+    } else {
+      flywheel1.set(0);
+      flywheel2.set(0);
+    }
   }
 
   @Override
