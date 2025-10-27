@@ -5,9 +5,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 enum SPEEDMODE {
   HIGH,
@@ -24,20 +25,24 @@ public class Robot extends TimedRobot {
    * initialization code.
    */
   public Robot() {}
-
-  private double speedSensH = 0.6;
-  private double turnSensH = 0.3;
-  private double speedSensL = 0.3;
-  private double turnSensL = 0.15;
+  //speed sensitivity H = High, L = low
+  private final double speedSensH = 0.6;
+  private final double turnSensH = 0.3;
+  private final double speedSensL = 0.3;
+  private final double turnSensL = 0.15;
   private SPEEDMODE driveSpeed = SPEEDMODE.HIGH;
 
-  //motors for the drivetrain
+  //motors for the drivetrain CHANGE CHANNEL TO PROPER CHANNEL
   private Spark leftMotor1 = new Spark(0);
   private Spark leftMotor2 = new Spark(1);
   private Spark rightMotor1 = new Spark(2);
   private Spark rightMotor2 = new Spark(3);
 
-  private Joystick stick1 = new Joystick(0);
+  private DifferentialDrive drive1 = new DifferentialDrive(leftMotor1,rightMotor1);
+  private DifferentialDrive drive2 = new DifferentialDrive(leftMotor2,rightMotor2);
+
+  //Joystick CHANGE PORT TO PROPER PORT
+  private Joystick driveStick = new Joystick(0);
 
   private double autoStartTime;
 
@@ -56,15 +61,11 @@ public class Robot extends TimedRobot {
     
     //moves forward for 2 seconds
     if(time - autoStartTime < 2){
-      leftMotor1.set(0.6);
-      leftMotor2.set(0.6);
-      rightMotor1.set(-0.6);
-      rightMotor2.set(-0.6);
+      drive1.arcadeDrive(0.6, 0);
+      drive2.arcadeDrive(0.6, 0);
     } else {
-      leftMotor1.set(0);
-      leftMotor2.set(0);
-      rightMotor1.set(0);
-      rightMotor2.set(0);
+      drive1.stopMotor();
+      drive2.stopMotor();
     }
   }
 
@@ -73,17 +74,13 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    double speed = driveSpeed == SPEEDMODE.HIGH ? stick1.getRawAxis(1)*speedSensH : stick1.getRawAxis(1)*speedSensL;
-    double turn = driveSpeed == SPEEDMODE.HIGH ? stick1.getRawAxis(4)*turnSensH : stick1.getRawAxis(4)*turnSensL;
+    //axis 1 = forward, 4 = turn
+    double speed = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(1)*speedSensH : driveStick.getRawAxis(1)*speedSensL;
+    double turn = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(4)*turnSensH : driveStick.getRawAxis(4)*turnSensL;
 
     //arcade drive
-    double left = speed + turn;
-    double right = speed - turn;
-
-    leftMotor1.set(left);
-    leftMotor2.set(left);
-    rightMotor1.set(-right);
-    rightMotor2.set(-right);
+    drive1.arcadeDrive(speed, turn);
+    drive2.arcadeDrive(speed, turn);
   }
 
   @Override
