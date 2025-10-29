@@ -27,17 +27,6 @@ public class Robot extends TimedRobot {
    */
   public Robot() {}
 
-  //Flywheel motors
-  private final Spark flywheel1 = new Spark(4);
-  private final Spark flywheel2 = new Spark(4);
-
-  private final double flywheelSpeed = 0.6;
-
-  //speed sensitivity H = High, L = low
-  private final double speedSensH = 0.6;
-  private final double turnSensH = 0.3;
-  private final double speedSensL = 0.3;
-  private final double turnSensL = 0.15;
   private SPEEDMODE driveSpeed = SPEEDMODE.HIGH;
 
   //motors for the drivetrain CHANGE CHANNEL TO PROPER CHANNEL
@@ -85,21 +74,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //axis 1 = forward, 4 = turn
-    double speed = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(1)*speedSensH : driveStick.getRawAxis(1)*speedSensL;
-    double turn = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(4)*turnSensH : driveStick.getRawAxis(4)*turnSensL;
+    double speed = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(1)*Constants.speedSensH : driveStick.getRawAxis(1)*Constants.speedSensL;
+    double turn = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(4)*Constants.turnSensH : driveStick.getRawAxis(4)*Constants.turnSensL;
 
     //arcade drive
     drive1.arcadeDrive(speed, turn);
     drive2.arcadeDrive(speed, turn);
-
-    //flywheel
-    if(buttonBoard.getRawButton(0) == true){
-      flywheel1.set(flywheelSpeed);
-      flywheel2.set(flywheelSpeed);
-    } else {
-      flywheel1.set(0);
-      flywheel2.set(0);
-    }
   }
 
   @Override
