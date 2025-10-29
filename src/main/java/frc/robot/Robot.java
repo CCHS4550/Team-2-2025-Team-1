@@ -74,8 +74,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //axis 1 = forward, 4 = turn
-    double speed = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(1)*Constants.speedSensH : driveStick.getRawAxis(1)*Constants.speedSensL;
-    double turn = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(4)*Constants.turnSensH : driveStick.getRawAxis(4)*Constants.turnSensL;
+    double speed = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(1)*Constants.driveConst.speedH : driveStick.getRawAxis(1)*Constants.driveConst.speedL;
+    double turn = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(4)*Constants.driveConst.turnL : driveStick.getRawAxis(4)*Constants.driveConst.turnL;
 
     //arcade drive
     drive1.arcadeDrive(speed, turn);
