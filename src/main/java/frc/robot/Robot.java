@@ -5,15 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Constants;
 
-enum SPEEDMODE {
-  HIGH,
-  LOW
-}
+
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
  * the TimedRobot documentation. If you change the name of this class or the package after creating
@@ -25,27 +21,10 @@ public class Robot extends TimedRobot {
    * initialization code.
    */
   public Robot() {}
-  //speed sensitivity H = High, L = low
-  private final double speedSensH = 0.6;
-  private final double turnSensH = 0.3;
-  private final double speedSensL = 0.3;
-  private final double turnSensL = 0.15;
-  private SPEEDMODE driveSpeed = SPEEDMODE.HIGH;
-
-  //motors for the drivetrain CHANGE CHANNEL TO PROPER CHANNEL
-  private Spark leftMotor1 = new Spark(0);
-  private Spark leftMotor2 = new Spark(1);
-  private Spark rightMotor1 = new Spark(2);
-  private Spark rightMotor2 = new Spark(3);
-
-  private DifferentialDrive drive1 = new DifferentialDrive(leftMotor1,rightMotor1);
-  private DifferentialDrive drive2 = new DifferentialDrive(leftMotor2,rightMotor2);
-
-  //Joystick CHANGE PORT TO PROPER PORT
-  private Joystick driveStick = new Joystick(0);
+  //Controller CHANGE PORT TO PROPER PORT
+  private CommandXboxController driveStick = new CommandXboxController(0);
 
   private double autoStartTime;
-
 
   @Override
   public void robotPeriodic() {}
@@ -59,14 +38,6 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     double time = Timer.getFPGATimestamp();
     
-    //moves forward for 2 seconds
-    if(time - autoStartTime < 2){
-      drive1.arcadeDrive(0.6, 0);
-      drive2.arcadeDrive(0.6, 0);
-    } else {
-      drive1.stopMotor();
-      drive2.stopMotor();
-    }
   }
 
   @Override
@@ -74,13 +45,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    //axis 1 = forward, 4 = turn
-    double speed = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(1)*speedSensH : driveStick.getRawAxis(1)*speedSensL;
-    double turn = driveSpeed == SPEEDMODE.HIGH ? driveStick.getRawAxis(4)*turnSensH : driveStick.getRawAxis(4)*turnSensL;
 
-    //arcade drive
-    drive1.arcadeDrive(speed, turn);
-    drive2.arcadeDrive(speed, turn);
   }
 
   @Override
