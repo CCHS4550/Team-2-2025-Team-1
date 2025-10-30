@@ -5,9 +5,10 @@ public class Constants {
     public enum state {
         TELEOP,
         AUTO,
-        SIM
+        SIM,
+        DISABLE
     }
-    public static state robotState = state.REAL;
+    public static state robotState = state.TELEOP;
     public static class driveConst{
         public static double speedH = 0.6;
         public static double speedL = 0.3;

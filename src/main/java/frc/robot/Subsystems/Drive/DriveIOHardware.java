@@ -5,17 +5,10 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Constants;
 
 public class DriveIOHardware implements DriveIO{
-    private final Spark leftMotor1;
-    private final Spark leftMotor2;
-    private final Spark rightMotor1;
-    private final Spark rightMotor2;
-
-    public DriveIOHardware (int[] channels){
-        leftMotor1 = new Spark(channels[0]);
-        leftMotor2 = new Spark(channels[1]);
-        rightMotor1 = new Spark(channels[2]);
-        rightMotor2 = new Spark(channels[3]);        
-    }
+    private final Spark leftMotor1 = new Spark(0);
+    private final Spark leftMotor2 = new Spark(1);
+    private final Spark rightMotor1 = new Spark(2);
+    private final Spark rightMotor2 = new Spark(3);
 
     private final DifferentialDrive drive1 = new DifferentialDrive(leftMotor1,rightMotor1);
     private final DifferentialDrive drive2 = new DifferentialDrive(leftMotor2,rightMotor2);

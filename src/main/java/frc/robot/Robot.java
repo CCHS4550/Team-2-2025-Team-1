@@ -24,29 +24,20 @@ public class Robot extends TimedRobot {
   //Controller CHANGE PORT TO PROPER PORT
   private CommandXboxController driveStick = new CommandXboxController(0);
 
-  private double autoStartTime;
-
   @Override
   public void robotPeriodic() {}
 
   @Override
-  public void autonomousInit() {
-    autoStartTime = Timer.getFPGATimestamp();
-  }
+  public void autonomousInit() {}
 
   @Override
-  public void autonomousPeriodic() {
-    double time = Timer.getFPGATimestamp();
-    
-  }
+  public void autonomousPeriodic() {}
 
   @Override
   public void teleopInit() {}
 
   @Override
-  public void teleopPeriodic() {
-
-  }
+  public void teleopPeriodic() {}
 
   @Override
   public void disabledInit() {}
