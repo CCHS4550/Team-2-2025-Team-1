@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class OI {
-    private CommandXboxController primaryController = new CommandXboxController(Constants.MainPrimaryPort);
+    private final CommandXboxController primaryController = new CommandXboxController(Constants.primaryControllerPort);
     public double getAxis(String axis){
         switch(axis){
             case "LX":
