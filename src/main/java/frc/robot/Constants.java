@@ -1,7 +1,7 @@
 package frc.robot;
 
 public class Constants {
-    public static final int primaryControllerPort = 0;
+    public static final int MainPrimaryPort = 0;
     public static double autoStartTime = 0.0;
     public enum state {
         TELEOP,
