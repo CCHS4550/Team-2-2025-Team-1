@@ -10,7 +10,7 @@ public class Constants {
     public static class flywheelConst{
 
     }
-    public static class intakeConst{
-
+    public static class IntakeConst{
+        public static double speed = 0.7;
     }
 }
