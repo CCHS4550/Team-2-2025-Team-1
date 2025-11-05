@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj.Timer;
+import frc.helpers.OI;
 import frc.robot.Constants;
 import frc.robot.Subsystems.Drive.DriveIOHardware;
 import frc.robot.subsystems.Drive.Drive;
@@ -22,10 +23,8 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  public static Drive drive = new Drive(new DriveIOHardware());
-  public static OI oi = new OI();
   
-  public RobotContainer robotContainer; 
+  private RobotContainer robotContainer; 
   public Robot() {
     robotContainer = new RobotContainer();
   }
@@ -34,7 +33,6 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
   }
-
   @Override
   public void autonomousInit() {}
 
