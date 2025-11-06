@@ -6,7 +6,7 @@ import frc.robot.Subsystems.Drive.Drive;
 
 public class DriveScheme {
     private static CommandXboxController controller;
-    private static void configure(Drive drive, int port){
+    public static void configure(Drive drive, int port){
         controller = new CommandXboxController(port);
         configureDrive(drive);
     }
