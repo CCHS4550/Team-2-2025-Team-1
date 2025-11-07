@@ -9,6 +9,10 @@ public class Constants {
         SIM,
         DISABLE
     }
+    public enum SPEEDMODE {
+        HIGH,
+        LOW
+    }
     public static state robotState = state.DISABLE;
     public static class driveConst{
 
@@ -21,11 +25,7 @@ public class Constants {
         public static double speedL = 0.3;
         public static double turnH = 0.3;
         public static double turnL = 0.1;
-
-        public enum SPEEDMODE {
-            HIGH,
-            LOW
-        }
+        
         public static SPEEDMODE driveSpeed = SPEEDMODE.HIGH;
     }
     public static class flywheelConst{

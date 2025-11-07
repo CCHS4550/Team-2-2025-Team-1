@@ -3,6 +3,7 @@ package frc.robot.Subsystems.Drive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Constants;
+import frc.robot.Constants.SPEEDMODE;
 import frc.robot.Constants.driveConst;
 
 public class DriveIOHardware implements DriveIO{
@@ -23,8 +24,8 @@ public class DriveIOHardware implements DriveIO{
     );
 
     public void arcade(double fStick, double tStick){
-        double speed = Constants.driveConst.driveSpeed == Constants.driveConst.SPEEDMODE.HIGH ? fStick*Constants.driveConst.speedH : fStick*Constants.driveConst.speedL;
-        double turn = Constants.driveConst.driveSpeed == Constants.driveConst.SPEEDMODE.HIGH ? tStick*Constants.driveConst.turnH : tStick*Constants.driveConst.turnL;
+        double speed = Constants.driveConst.driveSpeed == SPEEDMODE.HIGH ? fStick*Constants.driveConst.speedH : fStick*Constants.driveConst.speedL;
+        double turn = Constants.driveConst.driveSpeed == SPEEDMODE.HIGH ? tStick*Constants.driveConst.turnH : tStick*Constants.driveConst.turnL;
 
         drive.arcadeDrive(speed, turn);
     }
