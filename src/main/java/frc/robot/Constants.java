@@ -10,6 +10,9 @@ public class Constants {
     public static class flywheelConst{
         public static double speedF = 0.6;
         public static double speedS = 0.3;
+
+        public static int port1 = 4;
+        public static int port2 = 5;
     }
     public static class intakeConst{
 

@@ -1,19 +1,19 @@
 package frc.robot.Subsystems.Flywheel;
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import frc.robot.Constants;
+import frc.robot.Constants.flywheelConst;
 
 public class FlywheelIOHardware implements FlywheelIO{
 
-    private final Spark flywheel1 = new Spark(4);
-    private final Spark flywheel2 = new Spark(5);
+    private final Spark flywheel1 = new Spark(flywheelConst.port1);
+    private final Spark flywheel2 = new Spark(flywheelConst.port2);
 
-    private void spinMotor(double speed) {
+    public void spinMotor(double speed) {
         flywheel1.set(speed);
         flywheel2.set(speed);
     }
 
-    private void stopMotor() {
+    public void stopMotor() {
         flywheel1.stopMotor();
         flywheel2.stopMotor();
     }
