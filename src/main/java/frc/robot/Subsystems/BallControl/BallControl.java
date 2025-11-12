@@ -1,4 +1,6 @@
 package frc.robot.Subsystems.BallControl;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConst;
 
@@ -10,7 +12,7 @@ public class BallControl extends SubsystemBase{
     public void stop(){
         io.stop();
     }
-    public void forward(){
-        io.forward(IntakeConst.speed);
+    public Command forward(){
+        return new RunCommand(()->{io.forward(IntakeConst.speed);},this);
     }
 }

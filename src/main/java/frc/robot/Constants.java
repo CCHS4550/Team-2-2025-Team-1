@@ -29,9 +29,14 @@ public class Constants {
         public static SPEEDMODE driveSpeed = SPEEDMODE.HIGH;
     }
     public static class flywheelConst{
+        public static final int port2 = 0;
+        public static final int port1 = 0;
 
+        public static double speed = 0.8; 
     }
     public static class IntakeConst{
-        public static double speed = 0.7;
+        public static int port = 6;
+
+        public static double speed = 0.5;
     }
 }

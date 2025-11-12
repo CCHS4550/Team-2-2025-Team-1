@@ -1,23 +1,17 @@
 package frc.controlschemes;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.BallControl.BallControl;
-import frc.robot.Subsystems.Drive.Drive;
+import frc.robot.Subsystems.Flywheel.Flywheel;
 
 public class BallScheme {
     private static CommandXboxController controller;
-    public static void configure(BallControl ballControl, int port){
+    public static void configure(BallControl ballControl, Flywheel flywheel, int port){
         controller = new CommandXboxController(port);
-        configureBalls(ballControl);
+        configureBalls(ballControl,flywheel);
     }
-    private static void configureBalls(BallControl ballControl){
-        RunCommand defaultIntake = new RunCommand(()->{
-            controller.rightBumper().onTrue(new Command() {
-               ballControl.forward();
-            });
-        }, ballControl);
-        ballControl.setDefaultCommand(defaultIntake);
+    private static void configureBalls(BallControl ballControl, Flywheel flywheel){
+        controller.rightBumper().whileTrue(ballControl.forward());
+        controller.start().onTrue(flywheel.spinMotor());
     }
 }
