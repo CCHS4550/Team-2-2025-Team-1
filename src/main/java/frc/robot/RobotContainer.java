@@ -19,4 +19,7 @@ public class RobotContainer {
         DriveScheme.configure(drive,Constants.primaryControllerPort);
         BallScheme.configure(ballControl,flywheel,Constants.primaryControllerPort);
     }
+    public void periodic(){
+        BallScheme.configureBalls(ballControl,flywheel);
+    }
 }

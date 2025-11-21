@@ -5,8 +5,8 @@ import frc.robot.Constants.flywheelConst;
 
 public class FlywheelIOHardware implements FlywheelIO{
 
-    private final PWMSparkMax flywheel1 = new PWMSparkMax(flywheelConst.port1);
-    private final PWMSparkMax flywheel2 = new PWMSparkMax(flywheelConst.port2);
+    private final SparkMax flywheel1 = new SparkMax(flywheelConst.port1,SparkLowLevel.MotorType.kBrushless);
+    private final SparkMax flywheel2 = new SparkMax(flywheelConst.port2,SparkLowLevel.MotorType.kBrushless);
 
     public void spinMotor(double speed) {
         flywheel1.set(speed);

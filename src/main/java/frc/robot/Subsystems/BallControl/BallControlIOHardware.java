@@ -4,7 +4,7 @@ import frc.robot.Constants.IntakeConst;
 
 
 public class BallControlIOHardware implements BallControlIO{
-    private final PWMSparkMax ballControlMotor = new PWMSparkMax(IntakeConst.port);
+    private final SparkMax ballControlMotor = new SparkMax(IntakeConst.port,SparkLowLevel.MotorType.kBrushless);
     public void forward (double speed){
         ballControlMotor.set(speed);
     }

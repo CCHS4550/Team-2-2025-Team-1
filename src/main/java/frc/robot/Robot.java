@@ -36,7 +36,9 @@ public class Robot extends TimedRobot {
   public void teleopInit() {}
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    robotContainer.periodic();
+  }
 
   @Override
   public void disabledInit() {}

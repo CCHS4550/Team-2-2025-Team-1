@@ -8,7 +8,7 @@ public class BallScheme {
     private static CommandXboxController controller;
     public static void configure(BallControl ballControl, Flywheel flywheel, int port){
         controller = new CommandXboxController(port);
-        configureBalls(ballControl,flywheel);
+        //configureBalls(ballControl,flywheel);
     }
     private static void configureBalls(BallControl ballControl, Flywheel flywheel){
         controller.rightBumper().whileTrue(ballControl.forward());

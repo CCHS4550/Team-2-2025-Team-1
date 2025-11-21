@@ -7,21 +7,15 @@ import frc.robot.Constants.SPEEDMODE;
 import frc.robot.Constants.driveConst;
 
 public class DriveIOHardware implements DriveIO{
-    private final PWMSparkMax LFMotor = new PWMSparkMax(driveConst.LFID);
-    private final PWMSparkMax LBMotor = new PWMSparkMax(driveConst.LBID);
-    private final PWMSparkMax RFMotor = new PWMSparkMax(driveConst.RFID);
-    private final PWMSparkMax RBMotor = new PWMSparkMax(driveConst.RBID);
+    private final SparkMax LFMotor = new SparkMax(driveConst.LFID);
+    private final SparkMax LBMotor = new SparkMax(driveConst.LBID);
+    private final SparkMax RFMotor = new SparkMax(driveConst.RFID);
+    private final SparkMax RBMotor = new SparkMax(driveConst.RBID);
 
-    private DifferentialDrive drive = new DifferentialDrive(
-        (double output) -> {
-            LFMotor.set(output);
-            LBMotor.set(output);
-        },
-        (double output) -> {
-            RFMotor.set(output);
-            RBMotor.set(output);
-        }
-    );
+    LFMotor.addFollower(LBMotor);
+    RFMotor.addFollower(RBMotor);
+
+    private DifferentialDrive drive = new DifferentialDrive(LFMotor,RFMotor);
 
     public void arcade(double fStick, double tStick){
         double speed = Constants.driveConst.driveSpeed == SPEEDMODE.HIGH ? fStick*Constants.driveConst.speedH : fStick*Constants.driveConst.speedL;
