@@ -1,12 +1,12 @@
 package frc.robot.Subsystems.Flywheel;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Constants.flywheelConst;
 
 public class FlywheelIOHardware implements FlywheelIO{
 
-    private final PWMSparkMax flywheel1 = new PWMSparkMax(flywheelConst.port1);
-    private final PWMSparkMax flywheel2 = new PWMSparkMax(flywheelConst.port2);
+    private final Spark flywheel1 = new Spark(flywheelConst.port1);
+    private final Spark flywheel2 = new Spark(flywheelConst.port2);
 
     public void spinMotor(double speed) {
         flywheel1.set(speed);

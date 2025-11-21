@@ -1,16 +1,16 @@
 package frc.robot.Subsystems.Drive;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Constants;
 import frc.robot.Constants.SPEEDMODE;
 import frc.robot.Constants.driveConst;
 
 public class DriveIOHardware implements DriveIO{
-    private final PWMSparkMax LFMotor = new PWMSparkMax(driveConst.LFID);
-    private final PWMSparkMax LBMotor = new PWMSparkMax(driveConst.LBID);
-    private final PWMSparkMax RFMotor = new PWMSparkMax(driveConst.RFID);
-    private final PWMSparkMax RBMotor = new PWMSparkMax(driveConst.RBID);
+    private final Spark LFMotor = new Spark(driveConst.LFID);
+    private final Spark LBMotor = new Spark(driveConst.LBID);
+    private final Spark RFMotor = new Spark(driveConst.RFID);
+    private final Spark RBMotor = new Spark(driveConst.RBID);
 
     private DifferentialDrive drive = new DifferentialDrive(
         (double output) -> {
