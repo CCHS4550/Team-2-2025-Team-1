@@ -1,10 +1,11 @@
 package frc.robot.Subsystems.BallControl;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Constants.IntakeConst;
 
 
 public class BallControlIOHardware implements BallControlIO{
-    private final SparkMax ballControlMotor = new SparkMax(IntakeConst.port,SparkLowLevel.MotorType.kBrushless);
+    private final Spark ballControlMotor = new Spark(IntakeConst.port);
     public void forward (double speed){
         ballControlMotor.set(speed);
     }

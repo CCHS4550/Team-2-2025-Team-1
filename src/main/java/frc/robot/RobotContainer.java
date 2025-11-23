@@ -14,12 +14,8 @@ public class RobotContainer {
     private final Flywheel flywheel = new Flywheel(new FlywheelIOHardware());
     private final BallControl ballControl = new BallControl(new BallControlIOHardware());
 
-    //Controller CHANGE PORT TO PROPER PORT
     public RobotContainer(){
         DriveScheme.configure(drive,Constants.primaryControllerPort);
         BallScheme.configure(ballControl,flywheel,Constants.primaryControllerPort);
-    }
-    public void periodic(){
-        BallScheme.configureBalls();
     }
 }
