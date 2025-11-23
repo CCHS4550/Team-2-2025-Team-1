@@ -18,16 +18,20 @@ public class Robot extends TimedRobot {
    */
   
   private RobotContainer robotContainer; 
-  public Robot() {
-    robotContainer = new RobotContainer();
-  }
+  public Robot() {}
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
   }
   @Override
-  public void autonomousInit() {}
+  public void robotInit(){
+    robotContainer = new RobotContainer();
+  }
+  @Override
+  public void autonomousInit() {
+    robotContainer.auto().schedule();
+  }
 
   @Override
   public void autonomousPeriodic() {}

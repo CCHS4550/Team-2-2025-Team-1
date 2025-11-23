@@ -11,7 +11,8 @@ public class BallScheme {
         configureBalls(ballControl,flywheel);
     }
     private static void configureBalls(BallControl ballControl, Flywheel flywheel){
-        controller.rightBumper().whileTrue(ballControl.forward());
+        controller.rightBumper().onTrue(ballControl.forward());
+        controller.rightBumper().onFalse(ballControl.stop());
         controller.start().onTrue(flywheel.spinMotor());
     }
 }

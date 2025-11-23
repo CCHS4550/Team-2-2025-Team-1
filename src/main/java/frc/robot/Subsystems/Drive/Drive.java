@@ -1,5 +1,7 @@
 package frc.robot.Subsystems.Drive;
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drive extends SubsystemBase{
@@ -13,10 +15,10 @@ public class Drive extends SubsystemBase{
     public void stop(){
         io.stop();
     }
-    public void forward(double speed){
-        io.forward(speed);
+    public Command forward(double speed){
+        return new RunCommand(()->{io.forward(speed);}, this);
     }
-    public void turn(double speed){
-        io.turn(speed);
+    public Command turn(double speed){
+        return new RunCommand(()->{io.turn(speed);}, this);
     }
 }

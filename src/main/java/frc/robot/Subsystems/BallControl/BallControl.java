@@ -9,10 +9,10 @@ public class BallControl extends SubsystemBase{
     public BallControl(BallControlIO io) {
         this.io = io;
     }
-    public void stop(){
-        io.stop();
+    public Command stop(){
+        return new RunCommand(()->{io.stop();},this);
     }
     public Command forward(){
-        return new RunCommand(()->{io.forward(IntakeConst.speed);},this);
+        return new RunCommand(()->{io.setSpeed(IntakeConst.speed);},this);
     }
 }
