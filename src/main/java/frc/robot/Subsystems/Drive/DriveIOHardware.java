@@ -7,10 +7,10 @@ import frc.robot.Constants.SPEEDMODE;
 import frc.robot.Constants.driveConst;
 
 public class DriveIOHardware implements DriveIO{
-    private final SparkMax LFMotor = new SparkMax(driveConst.LFID);
-    private final SparkMax LBMotor = new SparkMax(driveConst.LBID);
-    private final SparkMax RFMotor = new SparkMax(driveConst.RFID);
-    private final SparkMax RBMotor = new SparkMax(driveConst.RBID);
+    private final SparkMax LFMotor = new SparkMax(driveConst.LFID,SparkLowLevel.MotorType.kBrushless);
+    private final SparkMax LBMotor = new SparkMax(driveConst.LBID,SparkLowLevel.MotorType.kBrushless);
+    private final SparkMax RFMotor = new SparkMax(driveConst.RFID,SparkLowLevel.MotorType.kBrushless);
+    private final SparkMax RBMotor = new SparkMax(driveConst.RBID,SparkLowLevel.MotorType.kBrushless);
 
     LFMotor.addFollower(LBMotor);
     RFMotor.addFollower(RBMotor);

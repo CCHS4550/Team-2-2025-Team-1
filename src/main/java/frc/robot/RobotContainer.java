@@ -20,6 +20,6 @@ public class RobotContainer {
         BallScheme.configure(ballControl,flywheel,Constants.primaryControllerPort);
     }
     public void periodic(){
-        BallScheme.configureBalls(ballControl,flywheel);
+        BallScheme.configureBalls();
     }
 }
